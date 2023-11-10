@@ -1,0 +1,23 @@
+<!-- login.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Página</title>
+  <!-- Enlace al archivo CSS -->
+  <link rel="stylesheet" type="text/css" href="/css/estilologin.css">
+</head>
+<body>
+  <div class="login-container">
+    <img src="/images/logo.jpeg" alt="Logo" width="380px" height="120px">
+    <h1>Iniciar Sesión</h1>
+    <form action="/login" method="post">
+      <input type="text" name="username" placeholder="Nombre de usuario" required>
+      <input type="password" name="password" placeholder="Contraseña" required>
+      <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p>¿No tienes una cuenta? <a href="/register">Regístrate</a></p>
+  </div>
+</body>
+</html>
