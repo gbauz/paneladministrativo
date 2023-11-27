@@ -1,0 +1,65 @@
+<!-- Resultados de búsqueda en el formato de CRUD -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados de Búsqueda</title>
+  <link rel="stylesheet" type="text/css" href="/css/estilocrud.css">
+  <script src="https://kit.fontawesome.com/635ad548e0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h1>Panel Administrativo</h1>
+      <nav>
+        <ul>
+          <li><a href="/crud"><i class="fas fa-users"></i> Registro de datos personales</a></li>
+          <li><a href="/busqueda"><i class="fas fa-search"></i> Buscar Usuarios</a></li>
+          <li><a href="#">Cerrar</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div id="dynamic-content-container" class="content-container">
+      <h1>Resultados de Búsqueda</h1>
+      
+      <!-- Formulario de búsqueda -->
+      <section class="search-form">
+        <form action="/buscar" method="GET">
+          <label for="search">Buscar por nombre o apellido:</label>
+          <input type="text" id="search" name="search" required>
+          <button type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <% if(users.length > 0) { %>
+        <section class="contact-list">
+          <h2>Usuarios encontrados:</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Mensaje</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(function(user) { %>
+                <tr>
+                  <td><%= user.nombre %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.mensaje %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </section>
+      <% } else if (searched) { %>
+        <p>No se encontraron resultados para la búsqueda.</p>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
+

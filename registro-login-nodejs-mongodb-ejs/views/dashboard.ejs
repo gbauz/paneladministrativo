@@ -1,10 +1,13 @@
 <!-- dashboard.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel de Control</title>
+  <script src="https://kit.fontawesome.com/635ad548e0.js" crossorigin="anonymous"></script>
+
   <link rel="stylesheet" type="text/css" href="/css/estilodashboard.css">
 </head>
 <body>
@@ -13,25 +16,18 @@
       <h1>Panel Administrativo</h1>
       <nav>
         <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Usuarios</a></li>
-          <li><a href="#">Configuración</a></li>
+          <li><a href="/crud"><i class="fas fa-users"></i> Registro de datos personales</a></li>
+          <li><a href="/busqueda">Consultar usuarios registrados</a></li>
+          <li><a href="#">Cerrar</a></li>
         </ul>
       </nav>
     </aside>
 
-    <main class="content">
-      <header>
-        <h1>Panel de Control</h1>
-      </header>
-
-      <section class="welcome-section">
-        <h2>Bienvenido al Panel de Control</h2>
-        <p>Explora las funciones disponibles en el menú de la izquierda.</p>
-      </section>
-    </main>
+    <!-- Contenedor para el contenido dinámico -->
+    <div id="dynamic-content-container" class="content-container">
+      <!-- Contenido dinámico se cargará aquí -->
+    </div>
   </div>
+
 </body>
 </html>
-
-

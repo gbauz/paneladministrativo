@@ -1,0 +1,84 @@
+<!-- crud.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control</title>
+  <link rel="stylesheet" type="text/css" href="/css/estilocrud.css">
+  <script src="https://kit.fontawesome.com/635ad548e0.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <h1>Panel Administrativo</h1>
+      <nav>
+        <ul>
+          <li><a href="/crud"><i class="fas fa-users"></i> Registro de datos personales</a></li>
+          <li><a href="/busqueda"><i class="fas fa-search"></i> Buscar Usuarios</a></li>
+          <li><a href="#">Cerrar</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <div id="dynamic-content-container" class="content-container">
+      <h1>Formulario CRUD</h1>
+      
+      <section class="add-contact">
+        <h2>Añadir contacto:</h2>
+        <form method="post" action="/contacto">
+          <label for="nombre">Nombre:</label>
+          <input type="text" name="nombre" required>
+                
+          <label for="email">Email:</label>
+          <input type="email" name="email" required>
+                
+          <label for="mensaje">Mensaje:</label>
+          <textarea name="mensaje" required></textarea>
+                
+          <button type="submit">Guardar contacto</button>
+        </form>
+      </section>
+    
+      <section class="contact-list">
+        <h2>Lista de contactos:</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Mensaje</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% contactos.forEach(function(contacto) { %>
+              <tr>
+                <td><%= contacto.nombre %></td>
+                <td><%= contacto.email %></td>
+                <td><%= contacto.mensaje %></td>
+                <td>
+                  <form method="post" action="/contacto/<%= contacto._id %>/eliminar" style="display: inline;">
+                    <input type="hidden" name="contactoId" value="<%= contacto._id %>">
+                    <button type="submit">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+             <!-- Agregar botón Generar Informe en la última fila -->
+      <tr>
+        <td colspan="4">
+          <form method="get" action="/informeCrud" style="display: inline;">
+            <button type="submit">Generar Informe</button>
+          </form>
+        </td>
+      </tr>
+
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

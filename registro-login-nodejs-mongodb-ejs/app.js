@@ -1,62 +1,80 @@
 // app.js
-
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
+const fs = require('fs');
+const generarInforme = require('./informeCrud');
+
+// Importar módulos de rutas
+const UserRoutes = require('./controls/userRoutes');
+const ContactoRoutes = require('./controls/contactoRoutes');
+const BusquedaRoutes = require('./controls/busquedaRoutes'); // Corrección
+
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Configuración de Mongoose y conexión a la base de datos
+// Conectar a la base de datos
 mongoose.connect('mongodb://127.0.0.1:27017/mi_basededatos', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-// Configuración de Express
-app.set('view engine', 'ejs');
+// Configuraciones generales
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
-// Modelo de usuario
-const User = mongoose.model('User', {
-  username: String,
-  password: String,
-});
+// Rutas relacionadas con User
+app.use('/', UserRoutes);
 
-// Rutas
+// Rutas relacionadas con Contacto
+app.use('/', ContactoRoutes);
+
+// Rutas de búsqueda
+app.use('/', BusquedaRoutes); // Corrección
+// Ruta principal
 app.get('/', (req, res) => {
-  res.redirect('/login'); // Redirige a la página de inicio de sesión al acceder a '/'
-});
-
-app.get('/register', (req, res) => {
-  res.render('register');
-});
-
-app.post('/register', async (req, res) => {
-  const { username, password } = req.body;
-  const user = new User({ username, password });
-  await user.save();
   res.redirect('/login');
 });
 
-app.get('/login', (req, res) => {
-  res.render('login');
+
+// Configuración de otras rutas dashboard
+app.get('/loadCrud', (req, res) => {
+  res.render('crud');
 });
 
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({ username, password });
-  if (user) {
-    // Usuario autenticado
-    res.redirect('/dashboard');
-  } else {
-    res.redirect('/login');
+app.get('/loadConsultas', (req, res) => {
+  res.render('consultas');
+});
+
+// Ruta para generar informe PDF
+app.get('/informeCrud', async (req, res) => {
+  try {
+    // Obtener los contactos antes de generar el informe
+    const contactos = await Contacto.find();
+
+    // Llamar a la función para generar el informe con los datos de los contactos
+    await generarInforme(contactos);
+
+    // Establecer los encabezados antes de enviar el archivo PDF
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename=informe.pdf');
+    res.setHeader('Content-Length', fs.statSync('informe.pdf').size);
+
+    // Crear un flujo de lectura desde el archivo PDF y enviarlo como respuesta
+    const pdfStream = fs.createReadStream('informe.pdf');
+    pdfStream.pipe(res);
+  } catch (error) {
+    console.error('Error al generar el informe PDF:', error);
+    res.status(500).send('Error al generar el informe PDF');
   }
 });
 
-app.get('/dashboard', (req, res) => {
-  res.render('dashboard');
-});
-
+// Escuchar en el puerto especificado
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

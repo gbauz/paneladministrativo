@@ -1,0 +1,142 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dashboard-container {
+    display: flex;
+  }
+  
+  .sidebar {
+    
+    width: 250px;
+    min-height: 100vh;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Cambia a "flex-start" para alinear al inicio */
+  }
+  
+  
+  
+  .sidebar h1 {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav li {
+    margin-bottom: 10px;
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #ecf0f1;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  nav a:hover {
+    color: #3498db; 
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  header {
+    margin-bottom: 20px;
+  }
+  
+  .welcome-section {
+    text-align: center;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  
+  /* estilodashboard.css */
+  .dashboard-container {
+    overflow: hidden; /* Esto es necesario para que el contenedor padre contenga a los elementos flotados */
+  }
+  
+  .sidebar {
+    float: left;
+    width: 200px; /* Ancho de la barra lateral izquierda */
+    padding: 15px;
+  }
+  
+  .content-container {
+    margin-left: 220px; /* Ancho de la barra lateral más un poco de espacio para separación */
+    padding: 15px;
+  }
+
+  /*Diseño formulario*/
+
+  /* estilocrud.css */
+form {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+  
+  button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+/*Estilos de la tabla*/
+
+/* estilocrud.css */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+}

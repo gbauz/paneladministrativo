@@ -69,3 +69,20 @@ h2 {
 p {
   color: #555;
 }
+
+
+/* estilodashboard.css */
+.dashboard-container {
+  overflow: hidden; /* Esto es necesario para que el contenedor padre contenga a los elementos flotados */
+}
+
+.sidebar {
+  float: left;
+  width: 200px; /* Ancho de la barra lateral izquierda */
+  padding: 15px;
+}
+
+.content-container {
+  margin-left: 220px; /* Ancho de la barra lateral más un poco de espacio para separación */
+  padding: 15px;
+}
